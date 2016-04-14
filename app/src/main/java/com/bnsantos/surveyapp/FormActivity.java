@@ -6,6 +6,7 @@ import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 public class FormActivity extends AppCompatActivity {
 
@@ -15,7 +16,7 @@ public class FormActivity extends AppCompatActivity {
         setContentView(R.layout.activity_form);
 
         WebView webView = (WebView) findViewById(R.id.webview);
-        webView.setWebChromeClient(new WebChromeClient());
+        webView.setWebViewClient(new MyWebViewClient());
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webView.loadUrl("https://docs.google.com/forms/d/1pWEND3qjWPSykM82Q2ddiF_FoeWS2eVWIEvDkN_pfeE/viewform");
@@ -26,5 +27,12 @@ public class FormActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private class MyWebViewClient extends WebViewClient{
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            return true;
+        }
     }
 }
